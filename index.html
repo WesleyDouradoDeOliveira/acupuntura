@@ -47,31 +47,62 @@
         header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         header img { height: 45px; }
 
-        /* HERO AJUSTADO PARA ENCAIXE PERFEITO */
+        /* HERO COM FUNDO FIXO E ENCAIXE PERFEITO */
         .hero {
-            height: 100vh;
-            height: 100svh; /* Altura inteligente para navegadores mobile */
+            position: relative;
             width: 100%;
-            background: url('hero.webp') no-repeat center center;
-            background-size: cover;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; position: relative;
+            height: 100vh;
+            height: 100svh; /* Altura exata para telas de celular */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             overflow: hidden;
+            /* Configuração da Imagem de Fundo */
+            background-image: url('hero.webp');
+            background-attachment: fixed; /* Deixa a imagem parada ao rolar */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
-        .hero::after { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,0.0); z-index: 1; }
-        .hero-content { position: relative; z-index: 10; max-width: 850px; padding: 20px; width: 100%; }
-        
-        .hero h1 { font-size: clamp(1.8rem, 8vw, 4rem); color: var(--roxo-dark); font-weight: 800; text-shadow: 0 2px 15px rgba(255,255,255,1); line-height: 1.1; }
-        .hero p { font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 700; color: #222; margin: 20px 0; text-shadow: 0 0 10px white; }
 
+        /* Camada para deixar a imagem mais clara ou escura (opcional) */
+        .hero::after { 
+            content: ""; 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(255,255,255,0.1); /* 0.1 deixa quase original, 0.4 fica mais fosco */
+            z-index: 1; 
+        }
+
+        .hero-content { 
+            position: relative; 
+            z-index: 10; 
+            max-width: 90%; 
+            padding: 20px; 
+        }
+        
+        .hero h1 { font-size: clamp(1.8rem, 8vw, 4rem); color: var(--roxo-dark); font-weight: 800; text-shadow: 0 2px 15px rgba(255,255,255,0.8); line-height: 1.1; }
+        .hero p { font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 700; color: #222; margin: 15px 0 25px; text-shadow: 0 0 10px white; }
+
+        /* Ajustes Mobile */
+        @media (max-width: 768px) {
+            .hero { 
+                background-attachment: scroll; /* Alguns celulares bugam com fixed, scroll é mais seguro */
+            }
+            .hero h1 { font-size: 2.1rem; }
+            .btn { padding: 16px 30px; width: 100%; max-width: 300px; }
+            .service-img img { height: 300px; }
+            .service-text { text-align: center; }
+        }
+
+        /* --- Restante dos Estilos --- */
         .features { padding: 80px 20px; background: #fff; text-align: center; }
         .features-grid { max-width: 1200px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
         .feature-card { padding: 30px; border-radius: 20px; background: #fdfbf9; transition: 0.3s; border: 1px solid #f1ecff; }
-        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(58, 42, 125, 0.1); }
         .feature-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
         .feature-card h3 { color: var(--roxo-dark); margin-bottom: 15px; font-weight: 700; }
         .feature-card p { font-size: 0.95rem; color: #666; line-height: 1.5; }
-
         .service-section { padding: 60px 20px; }
         .service-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
         .service-container.reverse { flex-direction: row-reverse; }
@@ -80,30 +111,13 @@
         .service-text { flex: 1; min-width: 320px; }
         .service-text h2 { font-size: 2rem; color: var(--roxo-dark); margin-bottom: 15px; }
         .service-text p { font-size: 1.1rem; color: #555; margin-bottom: 25px; line-height: 1.6; }
-
-        .depo-scroll-container {
-            height: 550px; overflow-y: scroll; padding: 25px; background: #f1ecff; 
-            border-radius: 30px; border: 2px solid #e2daff; margin: 40px auto; max-width: 1000px;
-        }
+        .depo-scroll-container { height: 550px; overflow-y: scroll; padding: 25px; background: #f1ecff; border-radius: 30px; border: 2px solid #e2daff; margin: 40px auto; max-width: 1000px; }
         .depo-grid-scroll { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .depo-grid-scroll img { width: 100%; border-radius: 15px; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
-
+        .depo-grid-scroll img { width: 100%; border-radius: 15px; border: 4px solid #fff; }
         .faq-container { max-width: 800px; margin: 0 auto; padding-bottom: 40px; }
         .faq-item { background: #fff; margin-bottom: 12px; border-radius: 15px; border: 1px solid #eee; overflow: hidden; }
-        .faq-item summary { padding: 20px; font-weight: 700; cursor: pointer; color: var(--roxo-dark); list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        .faq-item summary::after { content: '+'; font-size: 1.5rem; color: var(--gold); }
-        .faq-item[open] summary::after { content: '-'; }
-        .faq-item p { padding: 0 20px 20px; color: #666; line-height: 1.5; }
-
+        .faq-item summary { padding: 20px; font-weight: 700; cursor: pointer; color: var(--roxo-dark); list-style: none; display: flex; justify-content: space-between; }
         footer { background: var(--roxo-dark); color: #fff; padding: 60px 20px; text-align: center; }
-
-        @media (max-width: 768px) {
-            .hero { padding-top: 60px; } /* Compensa o header fixo */
-            .service-img img { height: 300px; }
-            .service-text { text-align: center; }
-            .service-container { gap: 30px; }
-            .btn { padding: 15px 25px; font-size: 0.9rem; }
-        }
     </style>
 </head>
 <body>
@@ -126,42 +140,31 @@
 
 <section class="features">
     <h2 style="color: var(--roxo-dark); font-size: 2.2rem;">Por que escolher a Symone Terapias?</h2>
-    <p style="color: var(--gold); font-weight: 600; margin-top: 10px;">Excelência em cada agulha, cuidado em cada detalhe.</p>
-    
     <div class="features-grid">
         <div class="feature-card">
-            <i class="fas fa-certificate" title="Certificação"></i>
+            <i class="fas fa-certificate"></i>
             <h3>Especialista Certificada</h3>
-            <p>Anos de experiência em Acupuntura Sistêmica e Estética Facial/Corporal avançada.</p>
+            <p>Anos de experiência em Acupuntura Sistêmica e Estética Facial avançada.</p>
         </div>
         <div class="feature-card">
-            <i class="fas fa-leaf" title="Método Natural"></i>
+            <i class="fas fa-leaf"></i>
             <h3>Método 100% Natural</h3>
-            <p>Resultados surpreendentes de rejuvenescimento e saúde sem o uso de produtos químicos ou cortes.</p>
+            <p>Resultados surpreendentes sem o uso de produtos químicos ou cortes.</p>
         </div>
         <div class="feature-card">
-            <i class="fas fa-home" title="Atendimento Home Care"></i>
+            <i class="fas fa-home"></i>
             <h3>Atendimento Home Care</h3>
-            <p>Levamos todo o conforto e estrutura clínica até a sua residência na Mooca e região.</p>
+            <p>Levamos o conforto da clínica até sua residência na Mooca e região.</p>
         </div>
         <div class="feature-card">
-            <i class="fas fa-heartbeat" title="Bem-estar"></i>
+            <i class="fas fa-heartbeat"></i>
             <h3>Foco no Bem-Estar</h3>
-            <p>Não tratamos apenas a queixa, mas o equilíbrio total entre mente, corpo e espírito.</p>
+            <p>Equilíbrio total entre mente, corpo e espírito.</p>
         </div>
     </div>
 </section>
 
-<section class="service-section">
-    <div class="service-container">
-        <div class="service-img"><img src="serviços/acupuntura-sistemica.webp" alt="Sessão de Acupuntura Sistêmica" loading="lazy"></div>
-        <div class="service-text">
-            <h2>🌿 Acupuntura Sistêmica</h2>
-            <p>Alívio de dores, ansiedade e equilíbrio total para sua saúde física e emocional.</p>
-            <a href="https://wa.me/5511996363450" class="btn">QUERO AGENDAR</a>
-        </div>
-    </div>
-</section>
+
 
 <section class="service-section" style="background:#f9f7ff;">
     <div class="service-container reverse">
