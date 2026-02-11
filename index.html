@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Symone Terapias na Mooca: Acupuntura Estética, Sistêmica e Bem-Estar. Resultados naturais, sem cortes e atendimento Home Care. Agende sua avaliação!">
+    <meta name="keywords" content="acupuntura mooca, acupuntura estetica, ventosaterapia mooca, home care mooca">
+    <title>Symone Terapias | Estética Avançada & Acupuntura na Mooca</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --roxo-dark: #3a2a7d;
+            --roxo-medio: #6a4fcf;
+            --gold: #c5a059;
+            --verde-zap: #25D366;
+            --texto: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: #fdfbf9; color: var(--texto); overflow-x: hidden; }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .btn { 
+            display: inline-block; padding: 18px 35px; background: var(--verde-zap); 
+            color: #fff; border-radius: 50px; text-decoration: none; font-weight: 700; 
+            transition: 0.3s; animation: pulse-green 2s infinite; border: none; cursor: pointer;
+            text-align: center;
+        }
+
+        .wa-fixed {
+            position: fixed; bottom: 25px; right: 25px; z-index: 9999;
+            display: flex; align-items: center; text-decoration: none;
+        }
+        .wa-icon { width: 65px; height: 65px; background: var(--verde-zap); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); animation: pulse-green 2s infinite; }
+
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 15px 0; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        header img { height: 55px; }
+
+        .hero {
+            height: 100vh; width: 100%;
+            background: url('hero.webp') no-repeat center center;
+            background-size: cover;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative;
+        }
+        .hero::after { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,0.1); z-index: 1; }
+        .hero-content { position: relative; z-index: 10; max-width: 850px; padding: 20px; }
+        .hero h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); color: var(--roxo-dark); font-weight: 800; text-shadow: 0 2px 15px rgba(255,255,255,1); line-height: 1.1; }
+        .hero p { font-size: 1.3rem; font-weight: 700; color: #222; margin: 25px 0; text-shadow: 0 0 10px white; }
+
+        .features { padding: 80px 20px; background: #fff; text-align: center; }
+        .features-grid { max-width: 1200px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .feature-card { padding: 30px; border-radius: 20px; background: #fdfbf9; transition: 0.3s; border: 1px solid #f1ecff; }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(58, 42, 125, 0.1); }
+        .feature-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
+        .feature-card h3 { color: var(--roxo-dark); margin-bottom: 15px; font-weight: 700; }
+        .feature-card p { font-size: 0.95rem; color: #666; line-height: 1.5; }
+
+        .service-section { padding: 60px 20px; }
+        .service-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .service-container.reverse { flex-direction: row-reverse; }
+        .service-img { flex: 1; min-width: 320px; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 45px rgba(0,0,0,0.12); }
+        .service-img img { width: 100%; height: 500px; object-fit: cover; display: block; }
+        .service-text { flex: 1; min-width: 320px; }
+        .service-text h2 { font-size: 2rem; color: var(--roxo-dark); margin-bottom: 15px; }
+        .service-text p { font-size: 1.1rem; color: #555; margin-bottom: 25px; line-height: 1.6; }
+
+        .depo-scroll-container {
+            height: 550px; overflow-y: scroll; padding: 25px; background: #f1ecff; 
+            border-radius: 30px; border: 2px solid #e2daff; margin: 40px auto; max-width: 1000px;
+        }
+        .depo-grid-scroll { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .depo-grid-scroll img { width: 100%; border-radius: 15px; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+
+        .faq-container { max-width: 800px; margin: 0 auto; padding-bottom: 40px; }
+        .faq-item { background: #fff; margin-bottom: 12px; border-radius: 15px; border: 1px solid #eee; overflow: hidden; }
+        .faq-item summary { padding: 20px; font-weight: 700; cursor: pointer; color: var(--roxo-dark); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        .faq-item summary::after { content: '+'; font-size: 1.5rem; color: var(--gold); }
+        .faq-item[open] summary::after { content: '-'; }
+        .faq-item p { padding: 0 20px 20px; color: #666; line-height: 1.5; }
+
+        footer { background: var(--roxo-dark); color: #fff; padding: 60px 20px; text-align: center; }
+
+        @media (max-width: 768px) {
+            .service-img img { height: 300px; }
+            .service-text { text-align: center; }
+            .service-container { gap: 30px; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="https://wa.me/5511996363450?text=Olá! Gostaria de agendar uma avaliação com a Symone." class="wa-fixed" aria-label="Falar no WhatsApp">
+    <div class="wa-icon"><i class="fab fa-whatsapp"></i></div>
+</a>
+
+<header>
+    <img src="logo.webp" alt="Symone Terapias Logo">
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Beleza Natural e Equilíbrio Sem Cortes</h1>
+        <p>Acupuntura Estética e Sistêmica na Mooca: Transforme sua autoestima.</p>
+        <a href="https://wa.me/5511996363450" class="btn">AGENDAR CONSULTA AGORA</a>
+    </div>
+</section>
+
+<section class="features">
+    <h2 style="color: var(--roxo-dark); font-size: 2.2rem;">Por que escolher a Symone Terapias?</h2>
+    <p style="color: var(--gold); font-weight: 600; margin-top: 10px;">Excelência em cada agulha, cuidado em cada detalhe.</p>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <i class="fas fa-certificate" title="Certificação"></i>
+            <h3>Especialista Certificada</h3>
+            <p>Anos de experiência em Acupuntura Sistêmica e Estética Facial/Corporal avançada.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-leaf" title="Método Natural"></i>
+            <h3>Método 100% Natural</h3>
+            <p>Resultados surpreendentes de rejuvenescimento e saúde sem o uso de produtos químicos ou cortes.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-home" title="Atendimento Home Care"></i>
+            <h3>Atendimento Home Care</h3>
+            <p>Levamos todo o conforto e estrutura clínica até a sua residência na Mooca e região.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-heartbeat" title="Bem-estar"></i>
+            <h3>Foco no Bem-Estar</h3>
+            <p>Não tratamos apenas a queixa, mas o equilíbrio total entre mente, corpo e espírito.</p>
+        </div>
+    </div>
+</section>
+
+<section class="service-section">
+    <div class="service-container">
+        <div class="service-img"><img src="serviços/acupuntura-sistemica.webp" alt="Sessão de Acupuntura Sistêmica" loading="lazy"></div>
+        <div class="service-text">
+            <h2>🌿 Acupuntura Sistêmica</h2>
+            <p>Alívio de dores, ansiedade e equilíbrio total para sua saúde física e emocional.</p>
+            <a href="https://wa.me/5511996363450" class="btn">QUERO AGENDAR</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section" style="background:#f9f7ff;">
+    <div class="service-container reverse">
+        <div class="service-img"><img src="serviços/ventosaterapia.webp" alt="Ventosaterapia para relaxamento" loading="lazy"></div>
+        <div class="service-text">
+            <h2>💆 Ventosaterapia</h2>
+            <p>Desintoxicação profunda e relaxamento muscular para quem busca bem-estar imediato.</p>
+            <a href="https://wa.me/5511996363450" class="btn">SABER MAIS</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section">
+    <div class="service-container">
+        <div class="service-img"><img src="serviços/moxabustao.webp" alt="Moxabustão técnica milenar" loading="lazy"></div>
+        <div class="service-text">
+            <h2>🔥 Moxabustão</h2>
+            <p>Técnica milenar com calor para fortalecer a imunidade e tratar dores crônicas.</p>
+            <a href="https://wa.me/5511996363450" class="btn">AGENDAR AGORA</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section" style="background:#f9f7ff;">
+    <div class="service-container reverse">
+        <div class="service-img"><img src="serviços/auriculoterapia.webp" alt="Aplicação de Auriculoterapia" loading="lazy"></div>
+        <div class="service-text">
+            <h2>👂 Auriculoterapia</h2>
+            <p>Controle de ansiedade, insônia e compulsão através de pontos na orelha.</p>
+            <a href="https://wa.me/5511996363450" class="btn">VER VAGAS</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section">
+    <div class="service-container">
+        <div class="service-img"><img src="serviços/eletro-acupuntura.webp" alt="Eletroacupuntura tecnológica" loading="lazy"></div>
+        <div class="service-text">
+            <h2>⚡ Eletroacupuntura</h2>
+            <p>Alta tecnologia aliada à tradição para resultados rápidos em dores e estética.</p>
+            <a href="https://wa.me/5511996363450" class="btn">SAIBA COMO FUNCIONA</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section" style="background:#f9f7ff;">
+    <div class="service-container reverse">
+        <div class="service-img"><img src="serviços/facial-corporal.webp" alt="Acupuntura Facial" loading="lazy"></div>
+        <div class="service-text">
+            <h2>✨ Facial e Corporal</h2>
+            <p>Rejuvenescimento e harmonização natural para realçar sua melhor versão.</p>
+            <a href="https://wa.me/5511996363450" class="btn">AVALIAÇÃO GRATUITA</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section">
+    <div class="service-container">
+        <div class="service-img"><img src="serviços/gordura.webp" alt="Tratamento de Gordura Localizada" loading="lazy"></div>
+        <div class="service-text">
+            <h2>🔥 Gordura Localizada</h2>
+            <p>Redução de medidas com métodos naturais e eficazes sem cirurgia.</p>
+            <a href="https://wa.me/5511996363450" class="btn">REDUZIR MEDIDAS</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section" style="background:#f9f7ff;">
+    <div class="service-container reverse">
+        <div class="service-img"><img src="serviços/vasinhos.webp" alt="Tratamento de vasinhos" loading="lazy"></div>
+        <div class="service-text">
+            <h2>💉 Tratamento de Vasinhos</h2>
+            <p>Melhore a estética das suas pernas com nosso tratamento especializado.</p>
+            <a href="https://wa.me/5511996363450" class="btn">QUERO ELIMINAR</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-section">
+    <div style="max-width:1100px; margin:0 auto; text-align:center;">
+        <h2 style="color:var(--roxo-dark); font-size:2.5rem; margin-bottom:40px;">Resultados Reais</h2>
+        <div class="service-container" style="gap:20px;">
+            <div class="service-img"><img src="resultado1.webp" alt="Resultado Antes e Depois 1" style="height:550px;" loading="lazy"><p style="padding:15px; font-weight:700;">Antes e Depois</p></div>
+            <div class="service-img"><img src="resultado2.webp" alt="Resultado Antes e Depois 2" style="height:550px;" loading="lazy"><p style="padding:15px; font-weight:700;">Resultado Tratamento</p></div>
+        </div>
+        
+        <div style="margin-top:50px; border-radius:25px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.1);">
+            <h2 style="margin-bottom:20px; color:var(--roxo-dark);">Conheça o Nosso Espaço</h2>
+            <video width="100%" controls style="border-radius:20px;" loading="lazy">
+                <source src="video.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos.
+            </video>
+        </div>
+    </div>
+</section>
+
+<section class="service-section">
+    <h2 style="text-align:center; color:var(--roxo-dark); margin-bottom:10px;">O Que Dizem Nossas Clientes</h2>
+    <div class="depo-scroll-container">
+        <div class="depo-grid-scroll">
+            <img src="avaliacoes/adriano.webp" alt="Depoimento Adriano" loading="lazy"> 
+            <img src="avaliacoes/amilton.webp" alt="Depoimento Amilton" loading="lazy">
+            <img src="avaliacoes/caoi.webp" alt="Depoimento" loading="lazy"> 
+            <img src="avaliacoes/cida.webp" alt="Depoimento" loading="lazy">
+            <img src="avaliacoes/eleine.webp" alt="Depoimento" loading="lazy"> 
+            <img src="avaliacoes/fernando.webp" alt="Depoimento" loading="lazy">
+            <img src="avaliacoes/francesco-guasco.webp" alt="Depoimento" loading="lazy"> 
+            <img src="avaliacoes/francesco-palumbo.webp" alt="Depoimento" loading="lazy">
+            <img src="avaliacoes/giuliana.webp" alt="Depoimento" loading="lazy"> 
+            <img src="avaliacoes/jose.webp" alt="Depoimento" loading="lazy">
+            <img src="avaliacoes/marcelo.webp" alt="Depoimento" loading="lazy"> 
+            <img src="avaliacoes/pamela.webp" alt="Depoimento" loading="lazy">
+            <img src="avaliacoes/roberto.webp" alt="Depoimento" loading="lazy"> 
+            <img src="avaliacoes/thalia.webp" alt="Depoimento" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<section class="service-section" style="background:#fdfbf9;">
+    <div class="faq-container">
+        <h2 style="text-align:center; color:var(--roxo-dark); margin-bottom:40px;">Dúvidas Frequentes</h2>
+        <details class="faq-item">
+            <summary>A acupuntura dói?</summary>
+            <p>Não. As agulhas são extremamente finas e a maioria das pessoas sente apenas um leve relaxamento profundo durante a aplicação.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Quantas sessões são necessárias?</summary>
+            <p>Para casos estéticos, resultados aparecem entre a 3ª e 5ª sessão. Para dores, o alívio costuma ser sentido já na primeira visita.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Como funciona o atendimento a domicílio?</summary>
+            <p>Levamos toda a estrutura até você na Mooca, Tatuapé, Ipiranga e Belenzinho.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Existe alguma contraindicação?</summary>
+            <p>A técnica é natural e segura. Fazemos uma avaliação prévia para casos específicos como gestantes ou uso de marca-passo.</p>
+        </details>
+    </div>
+</section>
+
+<section class="service-section">
+    <div style="max-width:1000px; margin: 0 auto; text-align: center;">
+        <h2 style="color:var(--roxo-dark);">📍 Onde Estamos</h2>
+        <p style="margin:15px 0 30px; font-weight:600;">Rua Curupace, 540 – Mooca, São Paulo</p>
+        <div style="border-radius:25px; overflow:hidden; height: 400px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.3486944627447!2d-46.5912443!3d-23.555902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce592f60d69661%3A0xc02e48e02d84793e!2sR.%20Curupace%2C%20540%20-%20Mooca%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2003120-010!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <h2>Symone Terapias</h2>
+    <p>Mooca | Tatuapé | Ipiranga | Belenzinho</p>
+    <p style="margin-top:20px;">© 2026 Symone Terapias. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
