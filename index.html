@@ -44,20 +44,25 @@
         }
         .wa-icon { width: 65px; height: 65px; background: var(--verde-zap); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); animation: pulse-green 2s infinite; }
 
-        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 15px 0; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        header img { height: 55px; }
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 10px 0; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        header img { height: 45px; }
 
+        /* HERO AJUSTADO PARA ENCAIXE PERFEITO */
         .hero {
-            height: 100vh; width: 100%;
+            height: 100vh;
+            height: 100svh; /* Altura inteligente para navegadores mobile */
+            width: 100%;
             background: url('hero.webp') no-repeat center center;
             background-size: cover;
             display: flex; align-items: center; justify-content: center;
             text-align: center; position: relative;
+            overflow: hidden;
         }
-        .hero::after { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,0.1); z-index: 1; }
-        .hero-content { position: relative; z-index: 10; max-width: 850px; padding: 20px; }
-        .hero h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); color: var(--roxo-dark); font-weight: 800; text-shadow: 0 2px 15px rgba(255,255,255,1); line-height: 1.1; }
-        .hero p { font-size: 1.3rem; font-weight: 700; color: #222; margin: 25px 0; text-shadow: 0 0 10px white; }
+        .hero::after { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,0.0); z-index: 1; }
+        .hero-content { position: relative; z-index: 10; max-width: 850px; padding: 20px; width: 100%; }
+        
+        .hero h1 { font-size: clamp(1.8rem, 8vw, 4rem); color: var(--roxo-dark); font-weight: 800; text-shadow: 0 2px 15px rgba(255,255,255,1); line-height: 1.1; }
+        .hero p { font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 700; color: #222; margin: 20px 0; text-shadow: 0 0 10px white; }
 
         .features { padding: 80px 20px; background: #fff; text-align: center; }
         .features-grid { max-width: 1200px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
@@ -93,11 +98,11 @@
         footer { background: var(--roxo-dark); color: #fff; padding: 60px 20px; text-align: center; }
 
         @media (max-width: 768px) {
+            .hero { padding-top: 60px; } /* Compensa o header fixo */
             .service-img img { height: 300px; }
             .service-text { text-align: center; }
             .service-container { gap: 30px; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
+            .btn { padding: 15px 25px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -302,7 +307,7 @@
         <h2 style="color:var(--roxo-dark);">📍 Onde Estamos</h2>
         <p style="margin:15px 0 30px; font-weight:600;">Rua Curupace, 540 – Mooca, São Paulo</p>
         <div style="border-radius:25px; overflow:hidden; height: 400px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.3486944627447!2d-46.5912443!3d-23.555902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce592f60d69661%3A0xc02e48e02d84793e!2sR.%20Curupace%2C%20540%20-%20Mooca%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2003120-010!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.408665306863!2d-46.5925016!3d-23.5537553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59335f663f73%3A0xc622616231908d13!2sR.%20Curupace%2C%20540%20-%20Mooca%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2003127-010!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
 </section>
@@ -314,5 +319,4 @@
 </footer>
 
 </body>
-
 </html>
