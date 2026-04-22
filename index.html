@@ -12,6 +12,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+    <!-- ================================================== -->
+    <!-- 1. TAG GLOBAL DO GOOGLE ADS (O "Cérebro")          -->
+    <!-- Identifica sua conta e prepara o rastreamento      -->
+    <!-- ================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18102212994"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18102212994');
+    </script>
+
+    <!-- ================================================== -->
+    <!-- 2. TAG DE EVENTO (O "Aviso de Clique")             -->
+    <!-- Dispara a conversão quando o cliente clica         -->
+    <!-- ATENÇÃO: Substitua COLOQUE_O_ROTULO_AQUI           -->
+    <!-- pelo seu Rótulo do Google Ads (ex: AbCdEfGhIj)     -->
+    <!-- ================================================== -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18102212994/_2rBCMPy6KAcEIKz57dD',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
 <style>
 /* --- CARD QUEM SOU EU --- */
 .about-section {
@@ -440,12 +473,6 @@ footer {
 </head>
 <body>
 
-
-
-
-
-
-
 <!-- Botão WhatsApp Fixo -->
 <a href="https://wa.me/5511996363450?text=Olá!%20Gostaria%20de%20agendar%20uma%20avaliação%20com%20a%20Symone." 
    class="wa-fixed" 
@@ -468,7 +495,7 @@ footer {
         </p>
 
         <a href="https://wa.me/5511996363450?text=Olá!%20Quero%20agendar%20uma%20consulta%20na%20Symone%20Terapias." 
-           class="btn" 
+           class="btn btn-whatsapp" 
            style="margin-top: 20px;" 
            target="_blank">
            AGENDAR CONSULTA AGORA
@@ -525,7 +552,7 @@ footer {
             </div>
 
             <a href="https://wa.me/5511996363450?text=Olá!%20Gostaria%20de%20falar%20diretamente%20com%20a%20Dra.%20Symone." 
-               class="btn" 
+               class="btn btn-whatsapp" 
                style="margin-top: 25px;"
                target="_blank">
                CONVERSAR COM A ESPECIALISTA
@@ -533,19 +560,6 @@ footer {
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <section class="service-section">
     <div class="service-container">
@@ -653,7 +667,7 @@ footer {
             <div class="result-info">
                 <h3>Recuperação de Cicatriz Profunda</h3>
                 <p>Tratamento focado na regeneração tecidual e estímulo de colágeno. Conseguimos suavizar a profundidade da cicatriz e restaurar a textura natural da pele do rosto.</p>
-                <a href="https://wa.me/5511996363450?text=Quero saber sobre o tratamento para cicatriz" class="btn" style="margin-top:15px; padding: 12px 25px;">AVALIAÇÃO GRATUITA</a>
+                <a href="https://wa.me/5511996363450?text=Quero saber sobre o tratamento para cicatriz" class="btn btn-whatsapp" style="margin-top:15px; padding: 12px 25px;">AVALIAÇÃO GRATUITA</a>
             </div>
         </div>
 
@@ -671,7 +685,7 @@ footer {
             <div class="result-info">
                 <h3 style="text-align: inherit;">Terapia Capilar Avançada</h3>
                 <p>Combate eficaz à queda acentuada e falhas no couro cabeludo. Com estímulos diretos nos folículos, promovemos o nascimento de fios novos e deixamos o cabelo visivelmente mais cheio e denso.</p>
-                <a href="https://wa.me/5511996363450?text=Quero saber sobre a terapia capilar" class="btn" style="margin-top:15px; padding: 12px 25px;">VER DISPONIBILIDADE</a>
+                <a href="https://wa.me/5511996363450?text=Quero saber sobre a terapia capilar" class="btn btn-whatsapp" style="margin-top:15px; padding: 12px 25px;">VER DISPONIBILIDADE</a>
             </div>
         </div>
 
@@ -689,7 +703,7 @@ footer {
             <div class="result-info">
                 <h3>Redução de Gordura Abdominal</h3>
                 <p>Aplicação de métodos naturais para redução de medidas e melhora da silhueta. Resultados visíveis na diminuição da gordura localizada e tonificação da região tratada.</p>
-                <a href="https://wa.me/5511996363450?text=Quero reduzir gordura abdominal" class="btn" style="margin-top:15px; padding: 12px 25px;">QUERO REDUZIR MEDIDAS</a>
+                <a href="https://wa.me/5511996363450?text=Quero reduzir gordura abdominal" class="btn btn-whatsapp" style="margin-top:15px; padding: 12px 25px;">QUERO REDUZIR MEDIDAS</a>
             </div>
         </div>
 
@@ -786,12 +800,23 @@ footer {
          Symone - CRTH-BR</p>
     </div>
 </footer>
+
+<!-- ================================================== -->
+<!-- 3. GATILHO DE CLIQUE (O "Dedo no Botão")           -->
+<!-- Vigia todos os botões .btn-whatsapp e dispara      -->
+<!-- a conversão ao clicar. Código original preservado. -->
+<!-- ================================================== -->
 <script>
 document.querySelectorAll(".btn-whatsapp").forEach(function(botao) {
     botao.addEventListener("click", function(e) {
         e.preventDefault();
 
-        window.open("https://wa.me/5511996363450?text=Olá! Gostaria de agendar uma avaliação.", "_blank");
+        var url = "https://wa.me/5511996363450?text=Olá! Gostaria de agendar uma avaliação.";
+        gtag_report_conversion(url);
+
+        setTimeout(function() {
+            window.open(url, "_blank");
+        }, 300);
     });
 });
 </script>
