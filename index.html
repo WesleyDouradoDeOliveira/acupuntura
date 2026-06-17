@@ -2637,10 +2637,131 @@ function toggleAllServices() {
     });
 })();
 
-// ===== WHATSAPP LINKS =====
-document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+// ===== SISTEMA CENTRALIZADO DE RASTREAMENTO DE CONVERSÃO =====
+/**
+ * Função genérica para disparar eventos de conversão
+ * @param {string} nomeDoEvento - Nome do evento (ex: 'clique_whatsapp', 'clique_instagram')
+ * @param {object} detalhes - Detalhes adicionais do evento
+ */
+function dispararConversao(nomeDoEvento, detalhes = {}) {
+    // 1. Log para testes e debug no console
+    console.log(`[CONVERSÃO] ${nomeDoEvento}`, detalhes);
+    
+    // 2. Google Ads Conversion (se gtag disponível)
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-18102212994/VR9pCNmw6L8cEIKz57dD',
+            'value': detalhes.valor || 1.0,
+            'currency': 'BRL',
+            'event_label': nomeDoEvento
+        });
+        console.log(`[GTAG] Evento enviado: ${nomeDoEvento}`);
+    }
+    
+    // 3. Google Tag Manager (se dataLayer disponível)
+    if (typeof dataLayer !== 'undefined') {
+        dataLayer.push({
+            'event': 'conversao_personalizada',
+            'evento_nome': nomeDoEvento,
+            'evento_detalhes': detalhes,
+            'timestamp': new Date().toISOString()
+        });
+    }
+    
+    // 4. Placeholder para Meta Pixel (futura integração)
+    // if (typeof fbq !== 'undefined') {
+    //     fbq('track', 'Contact', { content_name: nomeDoEvento });
+    // }
+}
+
+// ===== RASTREAMENTO DE CLIQUES - WHATSAPP =====
+document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp"]').forEach(link => {
+    // Adicionar atributos necessários
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
+    
+    // Adicionar listener de conversão
+    link.addEventListener('click', function(e) {
+        const textoLink = this.textContent.trim();
+        const urlWhatsapp = this.getAttribute('href');
+        
+        dispararConversao('clique_whatsapp', {
+            'texto_botao': textoLink,
+            'posicao': this.closest('section')?.id || 'desconhecida',
+            'classe': this.className,
+            'tipo_dispositivo': window.innerWidth <= 768 ? 'mobile' : 'desktop'
+        });
+    });
+});
+
+// ===== RASTREAMENTO DE CLIQUES - REDES SOCIAIS =====
+document.querySelectorAll('a[href*="instagram"], a[href*="facebook"], a[href*="linkedin"], a[href*="youtube"], a[href*="twitter"], a[href*="tiktok"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const urlOrigem = this.getAttribute('href');
+        const redeRegex = /(instagram|facebook|linkedin|youtube|twitter|tiktok)/i;
+        const redesEncontradas = urlOrigem.match(redeRegex);
+        const redesocial = redesEncontradas ? redesEncontradas[1].toLowerCase() : 'desconhecida';
+        
+        dispararConversao(`clique_rede_social_${redesocial}`, {
+            'rede_social': redesocial,
+            'url': urlOrigem,
+            'posicao': this.closest('section')?.id || 'desconhecida'
+        });
+    });
+});
+
+// ===== RASTREAMENTO DE CLIQUES - BOTÕES CTA E AGENDAMENTO =====
+document.querySelectorAll('a.btn, button.btn, a[class*="cta"], button[class*="cta"]').forEach(elemento => {
+    // Verificar se não é WhatsApp (já rastreado)
+    const href = elemento.getAttribute('href') || '';
+    if (!href.includes('wa.me') && !href.includes('api.whatsapp')) {
+        elemento.addEventListener('click', function(e) {
+            const textoBotao = this.textContent.trim();
+            const href = this.getAttribute('href') || 'javascript';
+            const secao = this.closest('section');
+            
+            dispararConversao('clique_cta', {
+                'texto_botao': textoBotao,
+                'href': href,
+                'secao': secao?.id || 'footer',
+                'posicao_pagina': secao?.className || 'desconhecida',
+                'tipo': this.classList.contains('btn-secondary') ? 'secundario' : 'primario'
+            });
+        });
+    }
+});
+
+// ===== RASTREAMENTO DE CLIQUES - LINKS DE TELEFONE =====
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const telefone = this.getAttribute('href').replace('tel:', '');
+        
+        dispararConversao('clique_telefone', {
+            'telefone': telefone,
+            'texto_link': this.textContent.trim(),
+            'posicao': this.closest('section')?.id || 'desconhecida'
+        });
+    });
+});
+
+// ===== RASTREAMENTO DE SEÇÕES VISÍVEIS (Scroll Tracking Básico) =====
+const secaoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.id) {
+            // Rastrear apenas na primeira vez que a seção fica visível
+            if (!entry.target.dataset.rastreada) {
+                dispararConversao('secao_visivel', {
+                    'secao_id': entry.target.id,
+                    'secao_titulo': entry.target.querySelector('h2')?.textContent || 'sem_titulo'
+                });
+                entry.target.dataset.rastreada = 'true';
+            }
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('section[id]').forEach(secao => {
+    secaoObserver.observe(secao);
 });
 
 // ===== LAZY LOAD IMAGES =====
@@ -2660,19 +2781,6 @@ if ('IntersectionObserver' in window) {
         imageObserver.observe(img);
     });
 }
-</script>
-
-<!-- ===== GOOGLE ADS CONVERSION ===== -->
-<script>
-document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-  link.addEventListener('click', function() {
-    gtag('event', 'conversion', {
-      'send_to': 'AW-18102212994/VR9pCNmw6L8cEIKz57dD',
-      'value': 1.0,
-      'currency': 'BRL'
-    });
-  });
-});
 </script>
 </body>
 </html>
