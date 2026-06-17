@@ -680,6 +680,7 @@
         font-size: 1rem;
         cursor: pointer;
         transition: 0.3s;
+        margin-bottom: 12px;
     }
 
     .all-services-toggle:hover {
@@ -758,14 +759,16 @@
         border-radius: 25px;
         overflow: hidden;
         box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        display: block;
     }
 
     .about-img img {
         width: 100%;
-        height: 450px;
+        height: 100%;
         object-fit: cover;
         display: block;
-        loading: lazy;
     }
 
     .about-text h2 {
@@ -1164,6 +1167,10 @@
     .location-container {
         max-width: 1100px;
         margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
     }
 
     .location-container > h2 {
@@ -1232,6 +1239,40 @@
 
     .location-item a:hover {
         opacity: 0.8;
+    }
+
+    /* Alinha ícones em uma coluna à esquerda e conteúdo ao lado (grid) */
+    .location-details .location-item {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .location-details .location-item i {
+        font-size: 1.25rem;
+        color: var(--gold);
+        text-align: center;
+    }
+
+    /* Phone item: manter texto centralizado mas ícone alinhado com os outros */
+    .phone-item {
+        text-align: center;
+    }
+
+    .phone-item > div {
+        display: block;
+    }
+
+    .phone-item a {
+        display: inline-block;
+        font-size: 1.05rem;
+    }
+
+    @media (max-width: 480px) {
+        .location-details .location-item {
+            grid-template-columns: 36px 1fr;
+        }
     }
 
     .neighborhoods {
@@ -1448,9 +1489,13 @@
     .testimonials-container,
     .location-container,
     .proof-grid,
-    .faq-container,
     .footer-container {
         text-align: center;
+    }
+
+    /* FAQ: alinhar à esquerda para aparência mais profissional */
+    .faq-container {
+        text-align: left;
     }
 
     .about-text,
@@ -1488,23 +1533,53 @@
         .testimonial-card {
             min-height: 240px;
         }
+
+        /* Padroniza alinhamento em telas maiores: texto à esquerda para aparência mais profissional */
+        .about-text,
+        .result-info,
+        .footer-box,
+        .location-info,
+        .services-container,
+        .services-grid {
+            text-align: left;
+        }
+
+        /* Alinha conteúdo dos cards de serviço e extra services */
+        .service-card,
+        .extra-service {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .service-card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            object-fit: cover;
+        }
+
+        .extra-service .btn,
+        .service-card .btn {
+            align-self: stretch;
+        }
     }
 
     /* ===== ALL SERVICES: 1 coluna centralizada ===== */
     .all-services-list.active {
         display: grid;
-        grid-template-columns: 1fr;
+        margin-top: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 20px;
-        justify-content: center;
         align-items: stretch;
-        max-width: 450px;
-        margin: 0 auto;
     }
 
     @media (max-width: 900px) {
         .all-services-list.active {
             grid-template-columns: 1fr;
             max-width: 450px;
+            margin: 0 auto;
         }
     }
 
@@ -1617,8 +1692,14 @@
             gap: 30px;
         }
 
+        .location-container {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
         .about-img img {
-            height: 220px;
+            height: 100%;
+            object-fit: cover;
         }
 
         .result-card {
@@ -2355,7 +2436,7 @@
                     </div>
                 </div>
                 
-                <div class="location-item">
+                <div class="location-item phone-item">
                     <i class="fas fa-phone"></i>
                     <div>
                         <strong>Telefone</strong>
